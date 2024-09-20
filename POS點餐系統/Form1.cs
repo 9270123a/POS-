@@ -25,7 +25,21 @@ namespace POS點餐系統
         public Form1()
         {
             InitializeComponent();
+            Label l1 = new Label();
+            Label l2 = new Label();
+            Label l3 = new Label();
+            Label l4 = new Label();
 
+            l1.Text = "品名";
+            l2.Text = "單價";
+            l3.Text = "數量";
+            l4.Text = "小計";
+            flowLayoutPanel7.Size = new Size(425, 50);
+            flowLayoutPanel7.FlowDirection = FlowDirection.LeftToRight;
+            flowLayoutPanel7.Controls.Add(l1);
+            flowLayoutPanel7.Controls.Add(l2);
+            flowLayoutPanel7.Controls.Add(l3);
+            flowLayoutPanel7.Controls.Add(l4);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -61,67 +75,155 @@ namespace POS點餐系統
 
         private void numericUpdown_ValueChanged(object sender, EventArgs e)
         {
+            Result = 0;
             NumericUpDown numericUpDown = (NumericUpDown)sender;
             var flow = numericUpDown.Parent;
+            var MainFlow = flow.Parent.Parent;
             var check = (CheckBox)flow.Controls[0];
-            string[] price = check.Text.Split('$');
-            int foodPrice = int.Parse(price[1]);
+
 
             
             
-
-            //if (numericupdown.value > 0 )
-            //{
-            //    check.checked = true;
-            //}
-            //else
-            //{
-            //    check.checked = false;
-            //}
-            //if (check.checked == true)
-            //{
-            //    result += (int)numericupdown.value * foodprice;
-            //}
-            //else
-            //{
-            //    result -= 1 * foodprice;
-            //}
-            //foodresultlb.text = result.tostring();
-        }
-        private void CheckBox_Click(object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            var flow = checkBox.Parent;
-            var c = (NumericUpDown)flow.Controls[1];
-            var d = c.Value;
-            int quality = (int)d;
-
-            string[] price = checkBox.Text.Split('$');
-            int foodPrice = int.Parse(price[1]);
-
-            if (checkBox.Checked)
+            if(check.Checked==false && numericUpDown.Value > 0)
             {
-                quality = 1;
-                c.Value = quality;
-                Result += foodPrice* quality;
+                check.Checked = true;
             }
-            else
+            else if(check.Checked ==true && numericUpDown.Value ==0)
             {
-                quality = (int)c.Value;
-                c.Value = 0;
-                Result -= foodPrice * quality;
+                check.Checked=false;
+            }
+
+            List<CheckDetail> checklist = ResultCalculate(MainFlow);
+            CalculatorResult(checklist);
+            DisplayDetail(checklist);
+        }
+
+        
+        private void CalculatorResult(List<CheckDetail> checklist)
+        {
+            int foodQuality;
+            int foodPrice;
+            for (int i = 0; i < checklist.Count; i++)
+            {
+
+                foodPrice = checklist[i].price;
+                foodQuality = checklist[i].quality;
+                Result += foodPrice * foodQuality;
             }
 
             foodresultLB.Text = Result.ToString();
         }
-
-        private void ResultCalculate()
+        private void CheckBox_Click(object sender, EventArgs e)
         {
+            Result = 0;
+            CheckBox checkBox = (CheckBox)sender;
+            var flow = checkBox.Parent;
+            var MainFlow = flow.Parent.Parent;
+            var numericUpDown = (NumericUpDown)flow.Controls[1];
+            var d = numericUpDown.Value;
+            int quality = (int)d;
+
+
+            if(checkBox.Checked == true && numericUpDown.Value == 0)
+            {
+                numericUpDown.Value = 1;
+            }
+            else
+            {
+                checkBox.Checked = false;
+                numericUpDown.Value = 0;
+            }
 
         }
 
 
-        // 
+
+        public class CheckDetail
+        {
+            public int price;
+            public int quality;
+            public string product;
+            public CheckDetail(int price,int quality, string product )
+            {
+                this.price = price;
+                this.quality = quality;
+                this.product = product;
+
+            }
+
+        }
+        private void DisplayDetail(List<CheckDetail> checkList)
+        {
+            FlowLayoutPanel flow = new FlowLayoutPanel();
+
+            flowLayoutPanel6.Controls.Clear();
+            for (int i = 0; i < checkList.Count; i++)
+            {
+
+                Label price = new Label();
+                Label quality = new Label();
+                Label product = new Label();
+                Label totalPrice = new Label();
+
+                product.Text = checkList[i].product;
+                quality.Text = checkList[i].quality.ToString();
+                price.Text = checkList[i].price.ToString();
+                int totalprice = checkList[i].quality * checkList[i].price;
+                totalPrice.Text = totalprice.ToString();
+
+                
+              
+                flow.Controls.Add(product);
+                flow.Controls.Add(quality);
+                flow.Controls.Add(price);
+                flow.Controls.Add(totalPrice);
+
+                flow.Size = new Size(425, 1000);
+                flow.FlowDirection = FlowDirection.LeftToRight;
+                
+                
+            }
+            flowLayoutPanel6.Controls.Add(flow);
+            
+
+        }
+
+        private List<CheckDetail> ResultCalculate(Control flow)
+        {
+            List<CheckDetail> CheckPriceList = new List<CheckDetail>();
+            CheckDetail checkdetail;
+
+            for (int i = 0; i < 4; i++)
+            {
+                 FlowLayoutPanel flow1234 = (FlowLayoutPanel)flow.Controls[i];
+
+                for(int j = 1;j<4;j++) {
+
+                    FlowLayoutPanel flow12 = (FlowLayoutPanel)flow1234.Controls[j];
+                    CheckBox Check = (CheckBox)flow12.Controls[0];
+                    var numericUpDown = (NumericUpDown)flow12.Controls[1];
+
+                    if(Check.Checked){
+
+                        string[] price = Check.Text.Split('$');
+                        string Product = price[0];
+                        int foodPrice = int.Parse(price[1]);
+                        int quality = (int)numericUpDown.Value;
+
+                        checkdetail = new CheckDetail(foodPrice, quality, Product);
+                        CheckPriceList.Add(checkdetail);
+                     }
+                    
+
+                }
+
+            }
+
+
+
+            return CheckPriceList;
+        }
+
 
     }
 }
