@@ -147,16 +147,16 @@
             // 
             // flowLayoutPanel6
             // 
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(714, 108);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(714, 78);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(443, 614);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(443, 644);
             this.flowLayoutPanel6.TabIndex = 13;
             // 
             // flowLayoutPanel7
             // 
             this.flowLayoutPanel7.Location = new System.Drawing.Point(714, 31);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(443, 71);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(443, 41);
             this.flowLayoutPanel7.TabIndex = 4;
             // 
             // Form1
