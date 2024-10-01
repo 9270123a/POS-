@@ -11,7 +11,7 @@ namespace POS點餐系統
         static List<CheckDetail> CheckPriceList = new List<CheckDetail>();
   
 
-        public static void Add(CheckDetail checkDetail)
+        public static void Add(CheckDetail checkDetail,string type)
         {
             CheckDetail precheckdetail = CheckPriceList.FirstOrDefault(x => x.product == checkDetail.product);
             if (precheckdetail == null)
@@ -28,11 +28,13 @@ namespace POS點餐系統
             }
 
             //int Result = ResultCal();
-            int Result = CheckPriceList.Sum(x => x.subtotal);
+            DisCountOrders(type);
 
-            Display.ShowPanel(Result, CheckPriceList);
-            
+        }
 
+        public static void DisCountOrders(string type)
+        {
+            DisCount.DisCountOrders(CheckPriceList, type);
         }
 
         //public int ResultCal()

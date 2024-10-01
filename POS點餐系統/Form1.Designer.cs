@@ -41,6 +41,8 @@
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -119,7 +121,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(959, 744);
+            this.label1.Location = new System.Drawing.Point(1003, 744);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 6;
@@ -128,7 +130,7 @@
             // foodresultLB
             // 
             this.foodresultLB.AutoSize = true;
-            this.foodresultLB.Location = new System.Drawing.Point(1029, 744);
+            this.foodresultLB.Location = new System.Drawing.Point(1073, 744);
             this.foodresultLB.Name = "foodresultLB";
             this.foodresultLB.Size = new System.Drawing.Size(11, 12);
             this.foodresultLB.TabIndex = 7;
@@ -159,11 +161,43 @@
             this.flowLayoutPanel7.Size = new System.Drawing.Size(443, 41);
             this.flowLayoutPanel7.TabIndex = 4;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "不選擇",
+            "雞腿飯買二送一",
+            "雞腿飯買三個200元",
+            "排骨飯搭紅茶100元",
+            "買控肉販送滷豆腐",
+            "排骨飯搭蛋糕150元",
+            "買控肉飯加茶碗蒸就送奶茶",
+            "雞腿飯買三個79折",
+            "排骨飯加紅茶打8折",
+            "全場消費300元折40",
+            "全場消費打85折"});
+            this.comboBox1.Location = new System.Drawing.Point(769, 744);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(199, 20);
+            this.comboBox1.TabIndex = 14;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(710, 747);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "優惠選擇";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 843);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.flowLayoutPanel7);
             this.Controls.Add(this.flowLayoutPanel6);
             this.Controls.Add(this.flowLayoutPanel5);
@@ -200,6 +234,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckDetail.cs" />
+    <Compile Include="DisCount.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Eventhandlers.cs" />
     <Compile Include="Form1.cs">

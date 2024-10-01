@@ -49,7 +49,7 @@ namespace POS點餐系統
             GenerateCheckBox(sidemeal, flowLayoutPanel2);
             GenerateCheckBox(drink, flowLayoutPanel3);
             GenerateCheckBox(dessert, flowLayoutPanel4);
-
+            comboBox1.SelectedIndex = 0;
 
             Eventhandlers.ResultEvent += EventHandlers_ResultEvent;
             Eventhandlers.DisplayEvent += EventHandlers_DisplayEvent;
@@ -119,7 +119,7 @@ namespace POS點餐系統
             int foodPrice = int.Parse(price[1]);
 
             CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
-            Order.Add(checkDetail);
+            Order.Add(checkDetail,comboBox1.Text);
             
 
         }
@@ -155,7 +155,7 @@ namespace POS點餐系統
             if (quality != 0)
             {
                 CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
-                Order.Add(checkDetail);
+                Order.Add(checkDetail, comboBox1.Text);
 
             }
 
@@ -164,6 +164,9 @@ namespace POS點餐系統
 
         }
 
-
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Order.DisCountOrders(comboBox1.Text);
+        }
     }
 }
