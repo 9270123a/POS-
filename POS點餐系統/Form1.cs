@@ -64,7 +64,7 @@ namespace POS點餐系統
 
         private void EventHandlers_DisplayEvent(object sender, FlowLayoutPanel e)
         {
-
+            flowLayoutPanel6.Controls.Clear();
             flowLayoutPanel6.Controls.Add(e);
 
         }
@@ -93,22 +93,23 @@ namespace POS點餐系統
 
         private void numericUpdown_ValueChanged(object sender, EventArgs e)
         {
-            Result = 0;
+
             NumericUpDown numericUpDown = (NumericUpDown)sender;
             var flow = numericUpDown.Parent;
             var MainFlow = flow.Parent.Parent;
             var checkBox = (CheckBox)flow.Controls[0];
             int quality = (int)numericUpDown.Value;
 
-            
-            
-            if(checkBox.Checked==false && numericUpDown.Value > 0)
+
+
+            if (checkBox.Checked == false && numericUpDown.Value == 1)
             {
                 checkBox.Checked = true;
             }
-            else if(checkBox.Checked ==true && numericUpDown.Value ==0)
+
+            if (checkBox.Checked == true && numericUpDown.Value == 0)
             {
-                checkBox.Checked=false;
+                checkBox.Checked = false;
             }
 
 
@@ -116,15 +117,14 @@ namespace POS點餐系統
             string[] price = checkBox.Text.Split('$');
             string Product = price[0];
             int foodPrice = int.Parse(price[1]);
-            if (checkBox.Checked == true)
-            {
-                CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
-                Order.Add(checkDetail);
-            }
+
+            CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
+            Order.Add(checkDetail);
+            
 
         }
 
-        
+
 
         private void CheckBox_Click(object sender, EventArgs e)
         {
@@ -133,34 +133,36 @@ namespace POS點餐系統
             var flow = checkBox.Parent;
             var MainFlow = flow.Parent.Parent;
             var numericUpDown = (NumericUpDown)flow.Controls[1];
-            var d = numericUpDown.Value;
-            int quality = (int)d;
 
 
-            if(checkBox.Checked == true && numericUpDown.Value == 0)
+
+            if (checkBox.Checked == true && numericUpDown.Value == 0)
             {
                 numericUpDown.Value = 1;
             }
-            else
+            
+            if(checkBox.Checked == false)
             {
-                checkBox.Checked = false;
+              
                 numericUpDown.Value = 0;
             }
 
-
+            int quality = (int)numericUpDown.Value;
             string[] price = checkBox.Text.Split('$');
             string Product = price[0];
             int foodPrice = int.Parse(price[1]);
 
-            if (checkBox.Checked == true)
+            if (quality != 0)
             {
-                CheckDetail checkDetail = new CheckDetail(foodPrice, quality , Product);
+                CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
                 Order.Add(checkDetail);
 
             }
 
-        }
 
+
+
+        }
 
 
     }
