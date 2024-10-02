@@ -39,8 +39,8 @@ namespace POS點餐系統
 
 
                 flow.Controls.Add(product);
-                flow.Controls.Add(quality);
                 flow.Controls.Add(price);
+                flow.Controls.Add(quality);
                 flow.Controls.Add(totalPrice);
 
 

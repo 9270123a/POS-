@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POS點餐系統.Discounts;
 
 namespace POS點餐系統
 {
@@ -27,13 +28,14 @@ namespace POS點餐系統
                 precheckdetail.quality = checkDetail.quality;
             }
 
-            //int Result = ResultCal();
+            
             DisCountOrders(type);
 
         }
 
         public static void DisCountOrders(string type)
         {
+            
             DisCount.DisCountOrders(CheckPriceList, type);
         }
 

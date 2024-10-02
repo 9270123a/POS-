@@ -48,8 +48,21 @@
   <ItemGroup>
     <Compile Include="CheckDetail.cs" />
     <Compile Include="DisCount.cs" />
+    <Compile Include="Discounts\3Drumstick.cs" />
+    <Compile Include="Discounts\ADiscount.cs" />
+    <Compile Include="Discounts\BraisedPordBlackTea.cs" />
+    <Compile Include="Discounts\BraisedPorkTeaEgg.cs" />
+    <Compile Include="Discounts\BraisePork.cs" />
+    <Compile Include="Discounts\Drumstick.cs" />
+    <Compile Include="Discounts\Drumstick379.cs" />
+    <Compile Include="Discounts\NoDiscount.cs" />
+    <Compile Include="Discounts\Ribs.cs" />
+    <Compile Include="Discounts\Ribs_cake.cs" />
+    <Compile Include="Discounts\TotalPaycs.cs" />
+    <Compile Include="Discounts\TotalPayDiscount.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Eventhandlers.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

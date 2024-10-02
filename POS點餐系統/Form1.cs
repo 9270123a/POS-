@@ -49,10 +49,10 @@ namespace POS點餐系統
             GenerateCheckBox(sidemeal, flowLayoutPanel2);
             GenerateCheckBox(drink, flowLayoutPanel3);
             GenerateCheckBox(dessert, flowLayoutPanel4);
-            comboBox1.SelectedIndex = 0;
 
             Eventhandlers.ResultEvent += EventHandlers_ResultEvent;
             Eventhandlers.DisplayEvent += EventHandlers_DisplayEvent;
+            comboBox1.SelectedIndex = 0;
 
         }
 
