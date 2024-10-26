@@ -5,86 +5,90 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using POS點餐系統.Strategies;
 
 namespace POS點餐系統
 {
     internal class DisCount
     {
-        public static void DisCountOrders(List<CheckDetail> list,string type)
+
+
+        public static void DisCountOrders(List<CheckDetail> list, POS點餐系統.Models.MenuModel.Discount type)
         {
 
-            int price;
-            int quality;
-            string product;
 
-            switch (type)
+            AStrategy aStrategy = null;
+
+
+
+
+            switch (type.Name)
             {
                 case "雞腿飯買二送一" :
 
-
-                    //int count = list.Count(t => t.product == "雞腿飯");
-                    //if (count >= 2)
-                    //{
-                    //    int number = count % 2;
-                        
-                    //    price = 0;
-                    //    quality = number;
-                    //    product = "雞腿飯";
-                    //    CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
-                    //    list.Add(checkDetail12);
-                    //}
+                    aStrategy = new BuyMFreeM(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.FreeItem);
                     break;
 
                 case "雞腿飯買三個200元":
-
+                    aStrategy = new BuyNTotalM(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.TotalPrice);
                     break;
 
                 case "排骨飯搭紅茶100元":
 
-                    //int blacktea = list.Count(t => t.product == "紅茶");
-                    //int Ribs = list.Count(t => t.product == "排骨");
+                    aStrategy = new BuyNAndBTotal(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.TotalPrice);
 
-                    //int set = Math.Min(blacktea, Ribs);
-
-                    //price = -20;
-                    //quality = set;
-                    //product = "(折扣)排骨飯";
-                    //CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
-                    //list.Add(checkDetail12);
 
                     break;
 
                 case "買控肉販送滷豆腐":
 
+                    aStrategy = new BuyNGetMFree(type.MultipleDiscount.ItemName, type.MultipleDiscount.Discount.FreeItem);
+
                     break;
 
                 case "排骨飯搭蛋糕150元":
+
+                    aStrategy = new BuyNAndBTotal(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.TotalPrice);
 
                     break;
 
 
                 case "買控肉飯加茶碗蒸就送奶茶":
 
+                    aStrategy = new BuyNAndMFreeZ(type.SetsItems.ItemName[0].ToString(), type.SetsItems.ItemName[1].ToString(), type.SetsItems.Discount.FreeItem);
+
                     break;
 
                 case "雞腿飯買三個79折":
 
+                    aStrategy = new BuyNDisocunt(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.Percentage);
                     break;
 
                 case "排骨飯加紅茶打8折":
 
+                    aStrategy = new BuyNAndMDiscount(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.Percentage);
+
                     break;
 
                 case "全場消費300元折40":
+                    aStrategy = new TotalMMinusN(type.TotalCheck.TotalPay, type.TotalCheck.Discount.TotalPrice);
 
                     break;
 
                 case "全場消費打85折":
 
+                    aStrategy = new TotalDiscount(type.TotalCheck.TotalPay, type.TotalCheck.Discount.Percentage);
+                    aStrategy.DiscountChoice(list, type.Strategy);
                     break;
+                default: 
+
+                    break;
+            }
+            if(aStrategy != null)
+            {
+                aStrategy.DiscountChoice(list, type.Name);
 
             }
-
 
 
 

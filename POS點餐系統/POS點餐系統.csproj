@@ -33,7 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckDetail.cs" />
+    <Compile Include="Models\CheckDetail.cs" />
     <Compile Include="DisCount.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Eventhandlers.cs" />
@@ -56,9 +60,21 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\KeyValueModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\AStrategy.cs" />
+    <Compile Include="Strategies\BuyMFreeM.cs" />
+    <Compile Include="Strategies\BuyNAndBTotal.cs" />
+    <Compile Include="Strategies\BuyNAndMDiscount.cs" />
+    <Compile Include="Strategies\BuyNAndMFreeZ.cs" />
+    <Compile Include="Strategies\BuyNDisocunt.cs" />
+    <Compile Include="Strategies\BuyNGetMFree.cs" />
+    <Compile Include="Strategies\BuyNTotalM.cs" />
+    <Compile Include="Strategies\TotalDiscount.cs" />
+    <Compile Include="Strategies\TotalMMinusN.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -71,6 +87,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Menu.json" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,5 +102,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

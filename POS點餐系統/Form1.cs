@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using Newtonsoft.Json;
+using POS點餐系統.Models;
+using static System.Windows.Forms.LinkLabel;
+using static POS點餐系統.Models.MenuModel;
 
 namespace POS點餐系統
 {
     public partial class Form1 : Form
     {
-        string[] foods = { "雞腿飯$70", "排骨飯$90", "控肉飯$100" };
-        string[] sidemeal = { "茶碗蒸$30", "滷豆腐$10", "滷蛋$10" };
-        string[] drink = { "奶茶$30", "紅茶$20", "可樂$40" };
-        string[] dessert = { "蛋糕$80", "布丁$90", "麵包$40" };
-        
-  
 
-
-        int Result;
         public Form1()
         {
             InitializeComponent();
@@ -45,14 +41,49 @@ namespace POS點餐系統
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            GenerateCheckBox(foods, flowLayoutPanel1);
-            GenerateCheckBox(sidemeal, flowLayoutPanel2);
-            GenerateCheckBox(drink, flowLayoutPanel3);
-            GenerateCheckBox(dessert, flowLayoutPanel4);
-            comboBox1.SelectedIndex = 0;
+            string menuPath = ConfigurationManager.AppSettings["MenuPath"];
+            using (StreamReader reader = new StreamReader(menuPath))
+            {
+                string content = reader.ReadToEnd();
+                MenuModel menumodel = JsonConvert.DeserializeObject<MenuModel>(content);
+
+                for (int i = 0; i < menumodel.Menus.Length; i++)
+                {
+                    FlowLayoutPanel MealPanel = new FlowLayoutPanel();
+                    FlowLayoutPanel MenuTypePanel = new FlowLayoutPanel();
+
+
+                    Label label = new Label();
+                    label.Text = menumodel.Menus[i].MenuType;
+
+                    MenuTypePanel.Controls.Add(label);
+                    MenuTypePanel.Height = 20;
+                    MealPanel.Controls.Add(MenuTypePanel);
+
+
+                    List<string> menu = menumodel.Menus[i].Meal.Select(x => x.Name + "$" + x.Price).ToList();
+                    MealPanel.Height = 350;
+                    MealPanel.Width = 250;
+                    GenerateCheckBox(menu.ToArray(), MealPanel);
+
+
+                }
+
+                List<KeyValueModel> strategies = menumodel.Discounts.Select(x => new KeyValueModel()
+                {
+                    Name = x.Name,
+                    Strategy = x
+                }).ToList();
+
+                comboBox1.DataSource = strategies;
+                comboBox1.DisplayMember = "Name";
+                comboBox1.ValueMember = "Strategy";
+
+            }
 
             Eventhandlers.ResultEvent += EventHandlers_ResultEvent;
             Eventhandlers.DisplayEvent += EventHandlers_DisplayEvent;
+            comboBox1.SelectedIndex = 0;
 
         }
 
@@ -70,10 +101,10 @@ namespace POS點餐系統
         }
         private void GenerateCheckBox(string[] foods, FlowLayoutPanel flow)
         {
-     
-            for(int i = 0; i < foods.Count(); i++)
+
+            for (int i = 0; i < foods.Count(); i++)
             {
-                FlowLayoutPanel Childflow  = new FlowLayoutPanel();
+                FlowLayoutPanel Childflow = new FlowLayoutPanel();
                 CheckBox checkBox = new CheckBox();
                 NumericUpDown numericUpDown = new NumericUpDown();
                 checkBox.Text = foods[i];
@@ -81,11 +112,12 @@ namespace POS點餐系統
                 numericUpDown.ValueChanged += numericUpdown_ValueChanged;
                 numericUpDown.Width = 50;
                 Childflow.Height = 50;
-                
+
                 Childflow.Controls.Add(checkBox);
                 Childflow.Controls.Add(numericUpDown);
-                flow.Controls.Add(Childflow);
 
+                flow.Controls.Add(Childflow);
+                flowLayoutPanel5.Controls.Add(flow);
 
             }
 
@@ -119,8 +151,8 @@ namespace POS點餐系統
             int foodPrice = int.Parse(price[1]);
 
             CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
-            Order.Add(checkDetail,comboBox1.Text);
-            
+            Order.Add(checkDetail, (Discount)comboBox1.SelectedValue);
+
 
         }
 
@@ -140,10 +172,10 @@ namespace POS點餐系統
             {
                 numericUpDown.Value = 1;
             }
-            
-            if(checkBox.Checked == false)
+
+            if (checkBox.Checked == false)
             {
-              
+
                 numericUpDown.Value = 0;
             }
 
@@ -155,7 +187,7 @@ namespace POS點餐系統
             if (quality != 0)
             {
                 CheckDetail checkDetail = new CheckDetail(foodPrice, quality, Product);
-                Order.Add(checkDetail, comboBox1.Text);
+                Order.Add(checkDetail, (Discount)comboBox1.SelectedValue);
 
             }
 
@@ -166,7 +198,13 @@ namespace POS點餐系統
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Order.DisCountOrders(comboBox1.Text);
+            if(comboBox1.SelectedValue is Discount discount)
+            {
+                Order.DisCountOrders(discount);
+
+            }
         }
+
+
     }
 }

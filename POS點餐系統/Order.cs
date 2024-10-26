@@ -11,7 +11,7 @@ namespace POS點餐系統
         static List<CheckDetail> CheckPriceList = new List<CheckDetail>();
   
 
-        public static void Add(CheckDetail checkDetail,string type)
+        public static void Add(CheckDetail checkDetail, POS點餐系統.Models.MenuModel.Discount type)
         {
             CheckDetail precheckdetail = CheckPriceList.FirstOrDefault(x => x.product == checkDetail.product);
             if (precheckdetail == null)
@@ -32,20 +32,10 @@ namespace POS點餐系統
 
         }
 
-        public static void DisCountOrders(string type)
+        public static void DisCountOrders(POS點餐系統.Models.MenuModel.Discount type)
         {
             DisCount.DisCountOrders(CheckPriceList, type);
         }
 
-        //public int ResultCal()
-        //{
-        //    int Result = 0;
-        //    for(int i = 0; i < CheckPriceList.Count; i++)
-        //    {
-        //        Result += CheckPriceList[i].subtotal;
-        //    }
-
-        //    return Result;
-        //}
     }
 }
