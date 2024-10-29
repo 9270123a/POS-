@@ -10,32 +10,27 @@ namespace POS點餐系統.Strategies
     {
 
         public float Discount;
-        public int Total;
         //全場消費打85折
-        public TotalDiscount(int Total, float Discount)
+        public TotalDiscount(POS點餐系統.Models.MenuModel.Discount type) : base(type)
         {
 
-            this.Total = Total;
-            this.Discount = Discount;
+            this.Discount = type.TotalCheck.Discount.Percentage;
 
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
 
-
-
-
+            int Total = list.Sum(x => x.product!= type.Name?x.subtotal:0);
             double discountedTotal = Total * Discount;  // 先計算折扣後金額
             int difference = (int)(discountedTotal - Total);
-            price = difference;
-            quality = 1;
-            product = stategy;
-            CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
+            
+
+
+
+            CheckDetail checkDetail12 = new CheckDetail(difference, 1, "(贈送)" + type.Name);
             list.Add(checkDetail12);
-
-
-
+            
 
 
 

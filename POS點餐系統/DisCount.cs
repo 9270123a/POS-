@@ -12,73 +12,72 @@ namespace POS點餐系統
     internal class DisCount
     {
 
+        static string[] discountWord = { "優惠","折扣","送","打折","()"};
 
         public static void DisCountOrders(List<CheckDetail> list, POS點餐系統.Models.MenuModel.Discount type)
         {
 
+            list.RemoveAll(x => discountWord.Any(word => x.product.Contains(word)));
+
+
 
             AStrategy aStrategy = null;
 
+            
 
 
-
-            switch (type.Name)
+            switch (type.Strategy)
             {
-                case "雞腿飯買二送一" :
+                case "POS點餐系統.Strategies.BuyMFreeM":
 
-                    aStrategy = new BuyMFreeM(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.FreeItem);
+                    aStrategy = new BuyMFreeM(type);
                     break;
 
-                case "雞腿飯買三個200元":
-                    aStrategy = new BuyNTotalM(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.TotalPrice);
+                case "POS點餐系統.Strategies.BuyNTotalM":
+                    aStrategy = new BuyNTotalM(type);
                     break;
 
-                case "排骨飯搭紅茶100元":
+                case "POS點餐系統.Strategies.BuyNAndBTotal":
 
-                    aStrategy = new BuyNAndBTotal(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.TotalPrice);
+                    aStrategy = new BuyNAndBTotal(type);
 
-
-                    break;
-
-                case "買控肉販送滷豆腐":
-
-                    aStrategy = new BuyNGetMFree(type.MultipleDiscount.ItemName, type.MultipleDiscount.Discount.FreeItem);
 
                     break;
 
-                case "排骨飯搭蛋糕150元":
+                case "POS點餐系統.Strategies.BuyNGetMFree":
 
-                    aStrategy = new BuyNAndBTotal(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.TotalPrice);
+                    aStrategy = new BuyNGetMFree(type);
 
                     break;
 
 
-                case "買控肉飯加茶碗蒸就送奶茶":
 
-                    aStrategy = new BuyNAndMFreeZ(type.SetsItems.ItemName[0].ToString(), type.SetsItems.ItemName[1].ToString(), type.SetsItems.Discount.FreeItem);
 
-                    break;
+                case "POS點餐系統.Strategies.BuyNAndMFreeZ":
 
-                case "雞腿飯買三個79折":
-
-                    aStrategy = new BuyNDisocunt(type.MultipleDiscount.ItemName, type.MultipleDiscount.Amount, type.MultipleDiscount.Discount.Percentage);
-                    break;
-
-                case "排骨飯加紅茶打8折":
-
-                    aStrategy = new BuyNAndMDiscount(type.SetsItems.Item1Name, type.SetsItems.Item2Name, type.SetsItems.Discount.Percentage);
+                    aStrategy = new BuyNAndMFreeZ(type);
 
                     break;
 
-                case "全場消費300元折40":
-                    aStrategy = new TotalMMinusN(type.TotalCheck.TotalPay, type.TotalCheck.Discount.TotalPrice);
+                case "POS點餐系統.Strategies.BuyNDisocunt":
+
+                    aStrategy = new BuyNDisocunt(type);
+                    break;
+
+                case "POS點餐系統.Strategies.BuyNAndMDiscount":
+
+                    aStrategy = new BuyNAndMDiscount(type);
 
                     break;
 
-                case "全場消費打85折":
+                case "POS點餐系統.Strategies.TotalMMinusN":
+                    aStrategy = new TotalMMinusN(type);
 
-                    aStrategy = new TotalDiscount(type.TotalCheck.TotalPay, type.TotalCheck.Discount.Percentage);
-                    aStrategy.DiscountChoice(list, type.Strategy);
+                    break;
+
+                case "POS點餐系統.Strategies.TotalDiscount":
+
+                    aStrategy = new TotalDiscount(type);
                     break;
                 default: 
 
@@ -86,7 +85,7 @@ namespace POS點餐系統
             }
             if(aStrategy != null)
             {
-                aStrategy.DiscountChoice(list, type.Name);
+                aStrategy.DiscountChoice(list);
 
             }
 

@@ -11,32 +11,31 @@ namespace POS點餐系統.Strategies
     {
 
 
-
-        public int Discount;
-        public int Total;
-        //全場消費打85折
-        public TotalMMinusN(int Total, int Discount)
+        int TotalPay;
+        int Discount;
+        //全場消費折40
+        public TotalMMinusN(POS點餐系統.Models.MenuModel.Discount type) : base(type)
         {
 
-            this.Total = Total;
-            this.Discount = Discount;
-
+            this.Discount = type.TotalCheck.Discount.TotalPrice;
+            this.TotalPay = type.TotalCheck.TotalPay;
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
 
+            int Total = list.Sum(x => x.product != type.Name ? x.subtotal : 0);
+
+            if (Total >= TotalPay)
+            {
 
 
-            price = -Discount;
-            quality = 1;
-            product = "11";
-            CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
-            list.Add(checkDetail12);
+                CheckDetail checkDetail12 = new CheckDetail(Discount, 1, "(贈送)" + type.Name);
+                list.Add(checkDetail12);
+                
 
 
-
-
+            }
 
 
         }

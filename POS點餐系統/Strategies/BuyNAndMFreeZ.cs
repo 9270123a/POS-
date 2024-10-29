@@ -13,28 +13,30 @@ namespace POS點餐系統.Strategies
         public string item2;
         public string FreeItem;
 
-        public BuyNAndMFreeZ(string item1, string item2, string FreeItem)
+        public BuyNAndMFreeZ(POS點餐系統.Models.MenuModel.Discount type) : base(type)
         {
 
-            this.item1 = item1;
-            this.item2 = item2;
-            this.FreeItem = FreeItem;
+            this.item1 = type.SetsItems.ItemName[0].ToString();
+            this.item2 = type.SetsItems.ItemName[1].ToString();
+            this.FreeItem = type.SetsItems.Discount.FreeItem;
 
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
             var product1 = list.FirstOrDefault(x => x.product == item1);
             var product2 = list.FirstOrDefault(x => x.product == item2);
+            
 
-            if (item1 != null && item2 != null)
+            if (product1 != null && product2 != null)
             {
+                int set = Math.Min(product1.quality, product2.quality);
 
-                price = 0;
-                quality = 1;
-                product = FreeItem;
-                CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
+                CheckDetail checkDetail12 = new CheckDetail(0, set, "(贈送)" + type.Name);
                 list.Add(checkDetail12);
+                
+
+
             }
 
 

@@ -52,34 +52,35 @@
             }
 
 
-        },        
+        },
         {
-            "Name":"買控肉飯送滷豆腐",
-            "Strategy":"買N送M",
-            "MultipleDiscount":{
-                "ItemName":"控肉飯",
-                "Amount":1,
-                "Discount":{
-                    "FreeItem":"滷豆腐", 
-                    "Count":1,
-                    "Percentage":0
+            "Name": "買控肉飯送滷豆腐",
+            "Strategy": "POS點餐系統.Strategies.BuyNGetMFree",
+            "MultipleDiscount": {
+                "ItemName": "控肉飯",
+                "Amount": 1,
+                "Discount": {
+                    "FreeItem": "滷豆腐",
+                    "Count": 1,
+                    "Percentage": 0
                 }
             },
-            "SetsItems":{
-                "ItemName":[],
-                "Discount":{
-                    "FreeItem":"", 
-                    "Count":0,
-                    "Percentage":0,
-                    "TotalPrice":0
+            "SetsItems": {
+                "ItemName": [],
+                "Discount": {
+                    "FreeItem": "",
+                    "Count": 0,
+                    "Percentage": 0,
+                    "TotalPrice": 0
                 }
-            },"TotalCheck":{
-                "TotalPay":0,
-                "Discount":{
-                    "FreeItem":"", 
-                    "Count":0,
-                    "Percentage":0.85,
-                    "TotalPrice":0
+            },
+            "TotalCheck": {
+                "TotalPay": 0,
+                "Discount": {
+                    "FreeItem": "",
+                    "Count": 0,
+                    "Percentage": 0.85,
+                    "TotalPrice": 0
                 }
             }
         },
@@ -263,10 +264,7 @@
                 }
             },
             "SetsItems": {
-                "ItemName": [
-                    { "item": "排骨飯" },
-                    { "item": "紅茶" }
-                ],
+                "ItemName": [ "排骨飯", "紅茶" ],
                 "Price": 0,
                 "Percentage": 0.8,
                 "TotalPrice": 0

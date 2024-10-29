@@ -9,11 +9,13 @@ namespace POS點餐系統.Strategies
 {
     public abstract class AStrategy
     {
-        public int price;
-        public int quality;
-        public string product;
 
-        public abstract void DiscountChoice(List<CheckDetail> list, string stategy);
+        public POS點餐系統.Models.MenuModel.Discount type;
+        public abstract void DiscountChoice(List<CheckDetail> list);
+        public AStrategy(POS點餐系統.Models.MenuModel.Discount type) {
+
+            this.type = type;
+        }
 
 
     }

@@ -16,29 +16,30 @@ namespace POS點餐系統.Strategies
         public string item2;
         public int total;
 
-        public BuyNAndBTotal(string item1, string item2, int total) { 
-        
-            this.item1 = item1;
-            this.item2 = item2;
-            this.total = total;
+        public BuyNAndBTotal(POS點餐系統.Models.MenuModel.Discount type) : base(type)
+        {
+
+            this.item1 = type.SetsItems.ItemName[0].ToString();
+            this.item2 = type.SetsItems.ItemName[1].ToString();
+            this.total = type.SetsItems.Discount.TotalPrice;
 
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
-            var item1 = list.FirstOrDefault(x => x.product == "item1");
-            var item2 = list.FirstOrDefault(x => x.product == "item2");
+            var product1 = list.FirstOrDefault(x => x.product == item1);
+            var product2 = list.FirstOrDefault(x => x.product == item2);
 
-            if (item1 != null && item2 != null)
+            if (product1 != null && product2 != null)
             {
-
-                int SetTotalPrice = item1.price + item2.price;
+                int set = Math.Min(product1.quality, product2.quality);
+                int SetTotalPrice = product1.price + product2.price;
                 total = total - SetTotalPrice;
-                price = total;
-                quality = 1;
-                product = stategy;
-                CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
+ 
+                CheckDetail checkDetail12 = new CheckDetail(total, set, "(贈送)" + type.Name);
                 list.Add(checkDetail12);
+                
+
             }
 
 

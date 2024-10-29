@@ -12,27 +12,30 @@ namespace POS點餐系統.Strategies
         public string item1;
         public string freeitem;
         //買控肉販送滷豆腐
-        public BuyNGetMFree(string item1, string freeitem)
+        public BuyNGetMFree(POS點餐系統.Models.MenuModel.Discount type) : base(type)
         {
 
-            this.item1 = item1;
-            this.freeitem = freeitem;
+            this.item1 = type.MultipleDiscount.ItemName;
+            this.freeitem = type.MultipleDiscount.Discount.FreeItem;
 
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
-            var product1 = list.FirstOrDefault(x => x.product == "item1");
+            var product1 = list.FirstOrDefault(x => x.product == item1);
 
 
             if (product1 != null)
             {
+                var Existproduct = list.FirstOrDefault(x => x.product == type.Name);
 
-                price = 0;
-                quality = 1;
-                product = freeitem;
-                CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
+
+
+                CheckDetail checkDetail12 = new CheckDetail(0, product1.quality, "(贈送)" + type.Name);
                 list.Add(checkDetail12);
+                
+
+
             }
 
 

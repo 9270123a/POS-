@@ -13,28 +13,28 @@ namespace POS點餐系統.Strategies
         public int Count;
         public string FreeItem;
 
-        public BuyMFreeM(string item,int Count, string FreeItem)
-        {
 
-            this.item = item;
-            this.Count = Count;
-            this.FreeItem = FreeItem;
+
+        public BuyMFreeM(POS點餐系統.Models.MenuModel.Discount type):base(type)
+        {
+            this.item = type.MultipleDiscount.ItemName;
+            this.Count = type.MultipleDiscount.Amount;
+            this.FreeItem = type.MultipleDiscount.Discount.FreeItem;
 
         }
 
-        public override void DiscountChoice(List<CheckDetail> list, string stategy)
+        public override void DiscountChoice(List<CheckDetail> list)
         {
             var product1 = list.FirstOrDefault(x => x.product == item);
-            var count = list.FirstOrDefault(x =>x.quality == Count);
+            var Existproduct = list.FirstOrDefault(x => x.product == type.Name);
+            if (product1 != null && product1.quality >=2) {
 
-            if(product1 != null && count != null) {
+                int number = product1.quality / 2;
 
-
-                price = 0;
-                quality = 1;
-                product = stategy;
-                CheckDetail checkDetail12 = new CheckDetail(price, quality, product);
+                CheckDetail checkDetail12 = new CheckDetail(0, number, "(贈送)" + type.Name);
                 list.Add(checkDetail12);
+                
+
 
             }
 
