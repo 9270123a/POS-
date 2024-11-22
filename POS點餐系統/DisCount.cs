@@ -21,68 +21,14 @@ namespace POS點餐系統
 
 
 
-            AStrategy aStrategy = null;
+            Type strategyType = Type.GetType(type.Strategy);
+            //取得類別
+            
+            var strategy = (AStrategy)Activator.CreateInstance(strategyType,new object[] {type});
+            AStrategy aStrategy = strategy;
 
             
 
-
-            switch (type.Strategy)
-            {
-                case "POS點餐系統.Strategies.BuyMFreeM":
-
-                    aStrategy = new BuyMFreeM(type);
-                    break;
-
-                case "POS點餐系統.Strategies.BuyNTotalM":
-                    aStrategy = new BuyNTotalM(type);
-                    break;
-
-                case "POS點餐系統.Strategies.BuyNAndBTotal":
-
-                    aStrategy = new BuyNAndBTotal(type);
-
-
-                    break;
-
-                case "POS點餐系統.Strategies.BuyNGetMFree":
-
-                    aStrategy = new BuyNGetMFree(type);
-
-                    break;
-
-
-
-
-                case "POS點餐系統.Strategies.BuyNAndMFreeZ":
-
-                    aStrategy = new BuyNAndMFreeZ(type);
-
-                    break;
-
-                case "POS點餐系統.Strategies.BuyNDisocunt":
-
-                    aStrategy = new BuyNDisocunt(type);
-                    break;
-
-                case "POS點餐系統.Strategies.BuyNAndMDiscount":
-
-                    aStrategy = new BuyNAndMDiscount(type);
-
-                    break;
-
-                case "POS點餐系統.Strategies.TotalMMinusN":
-                    aStrategy = new TotalMMinusN(type);
-
-                    break;
-
-                case "POS點餐系統.Strategies.TotalDiscount":
-
-                    aStrategy = new TotalDiscount(type);
-                    break;
-                default: 
-
-                    break;
-            }
             if(aStrategy != null)
             {
                 aStrategy.DiscountChoice(list);

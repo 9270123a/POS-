@@ -1,32 +1,394 @@
+// {
+//     "Menus":[
+//         {
+//             "MenuType":"主餐",
+//             "Meal":[{"Name":"雞腿飯","Price":70},{"Name":"排骨飯","Price":90},{"Name":"控肉飯","Price":100} ]
+//         },{
+//             "MenuType":"附餐",
+//             "Meal":[{"Name":"茶碗蒸","Price":30},{"Name":"滷豆腐","Price":10},{"Name":"滷蛋","Price":10} ]
+//         },        {
+//             "MenuType":"飲料",
+//             "Meal":[{"Name":"奶茶","Price":30},{"Name":"紅茶","Price":20},{"Name":"可樂","Price":40} ]
+//         },
+//         {
+//             "MenuType":"甜點",
+//             "Meal":[{"Name":"蛋糕","Price":80},{"Name":"布丁","Price":90},{"Name":"麵包","Price":40} ]
+//         }
+
+//     ],
+//     "Discounts":[
+//         {
+
+
+//             "Name": "雞腿飯買二送一",
+//             "Strategy": "POS點餐系統.Strategies.BuyNGetMFree",
+//             "MultipleDiscount": {
+//                 "ItemName": "雞腿飯",
+//                 "Amount": 2,
+//                 "Discount": {
+//                     "FreeItem": "雞腿飯",
+//                     "Count": 1,
+//                     "Percentage": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "Item1Name": "",
+//                 "Item2Name": "",
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+
+//         },
+//         {
+//             "Name": "買控肉飯送滷豆腐",
+//             "Strategy": "POS點餐系統.Strategies.BuyNGetMFree",
+//             "MultipleDiscount": {
+//                 "ItemName": "控肉飯",
+//                 "Amount": 1,
+//                 "Discount": {
+//                     "FreeItem": "滷豆腐",
+//                     "Count": 1,
+//                     "Percentage": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [],
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0.85,
+//                     "TotalPrice": 0
+//                 }
+//             }
+//         },
+//         {
+//             "Name": "買控肉飯加茶碗蒸就送奶茶",
+//             "Strategy": "POS點餐系統.Strategies.BuyNAndMFreeZ",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": ["控肉飯", "茶碗蒸"],
+
+//                 "Discount": {
+//                     "FreeItem": "奶茶",
+//                     "Count": 1,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+//         },
+//         {
+//             "Name": "雞腿飯買三個200元",
+//             "Strategy": "POS點餐系統.Strategies.BuyNTotalM",
+//             "MultipleDiscount": {
+//                 "ItemName": "雞腿飯",
+//                 "Amount": 3,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 200
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [],
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+//         },
+//         {
+//             "Name": "雞腿飯買三個79折",
+//             "Strategy": "POS點餐系統.Strategies.BuyNDisocunt",
+//             "MultipleDiscount": {
+//                 "ItemName": "雞腿飯",
+//                 "Amount": 3,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0.79,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [],
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+
+//         },
+//         {
+//             "Name": "排骨飯搭紅茶100元",
+//             "Strategy": "POS點餐系統.Strategies.BuyNAndBTotal",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [ "排骨飯", "紅茶" ],
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 100
+
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+
+//         },
+//         {
+//             "Name": "排骨飯搭蛋糕150元",
+//             "Strategy": "POS點餐系統.Strategies.BuyNAndBTotal",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [ "排骨飯", "蛋糕" ],
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 150
+//                 }
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+
+//         },
+//         {
+//             "Name": "排骨飯加紅茶打8折",
+//             "Strategy": "POS點餐系統.Strategies.BuyNAndMDiscount",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [ "排骨飯", "紅茶" ],
+//                 "Price": 0,
+//                 "Percentage": 0.8,
+//                 "TotalPrice": 0
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+
+//         },
+//         {
+//             "Name": "全場消費打85折",
+//             "Strategy": "POS點餐系統.Strategies.TotalDiscount",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [],
+//                 "Price": 0,
+//                 "Percentage": 0,
+//                 "TotalPrice": 0
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0.85,
+//                     "TotalPrice": 0
+//                 }
+//             }
+
+//         },
+//         {
+//             "Name": "全場消費300元折40",
+//             "Strategy": "POS點餐系統.Strategies.TotalDiscount",
+//             "MultipleDiscount": {
+//                 "ItemName": "",
+//                 "Amount": 0,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": 0
+//                 }
+//             },
+//             "SetsItems": {
+//                 "ItemName": [],
+//                 "Price": 0,
+//                 "Percentage": 0,
+//                 "TotalPrice": 0
+//             },
+//             "TotalCheck": {
+//                 "TotalPay": 300,
+//                 "Discount": {
+//                     "FreeItem": "",
+//                     "Count": 0,
+//                     "Percentage": 0,
+//                     "TotalPrice": -40
+//                 }
+//             }
+
+//         }
+
+//     ]
+// }{
+
 {
-    "Menus":[
+    "Menus": [
         {
-            "MenuType":"主餐",
-            "Meal":[{"Name":"雞腿飯","Price":70},{"Name":"排骨飯","Price":90},{"Name":"控肉飯","Price":100} ]
-        },{
-            "MenuType":"附餐",
-            "Meal":[{"Name":"茶碗蒸","Price":30},{"Name":"滷豆腐","Price":10},{"Name":"滷蛋","Price":10} ]
-        },        {
-            "MenuType":"飲料",
-            "Meal":[{"Name":"奶茶","Price":30},{"Name":"紅茶","Price":20},{"Name":"可樂","Price":40} ]
+            "MenuType": "主餐",
+            "Meal": [
+                {"Name": "和牛燒肉套餐", "Price": 380},
+                {"Name": "黑豚燒肉套餐", "Price": 280},
+                {"Name": "牛五花燒肉套餐", "Price": 250}
+            ]
         },
         {
-            "MenuType":"甜點",
-            "Meal":[{"Name":"蛋糕","Price":80},{"Name":"布丁","Price":90},{"Name":"麵包","Price":40} ]
-        }
-
-    ],
-    "Discounts":[
+            "MenuType": "附餐",
+            "Meal": [
+                {"Name": "韓式泡菜", "Price": 40},
+                {"Name": "生菜包肉", "Price": 30},
+                {"Name": "蒜片", "Price": 20}
+            ]
+        },
         {
-
-
-            "Name": "雞腿飯買二送一",
-            "Strategy": "POS點餐系統.Strategies.BuyNGetMFree",
+            "MenuType": "飲料",
+            "Meal": [
+                {"Name": "韓式燒酒", "Price": 150},
+                {"Name": "生啤酒", "Price": 120},
+                {"Name": "蘇打水", "Price": 50}
+            ]
+        },
+        {
+            "MenuType": "甜點",
+            "Meal": [
+                {"Name": "抹茶冰淇淋", "Price": 60},
+                {"Name": "烤香蕉", "Price": 80},
+                {"Name": "紅豆湯圓", "Price": 70}
+            ]
+        }
+    ],
+    "Discounts": [
+        {
+            "Name": "和牛套餐買二送一",
+            "Strategy": "POS點餐系統.Strategies.BuyMFreeM",
             "MultipleDiscount": {
-                "ItemName": "雞腿飯",
+                "ItemName": "和牛燒肉套餐",
                 "Amount": 2,
                 "Discount": {
-                    "FreeItem": "雞腿飯",
+                    "FreeItem": "和牛燒肉套餐",
                     "Count": 1,
                     "Percentage": 0
                 }
@@ -50,17 +412,15 @@
                     "TotalPrice": 0
                 }
             }
-
-
         },
         {
-            "Name": "買控肉飯送滷豆腐",
+            "Name": "黑豚套餐送韓式泡菜",
             "Strategy": "POS點餐系統.Strategies.BuyNGetMFree",
             "MultipleDiscount": {
-                "ItemName": "控肉飯",
+                "ItemName": "黑豚燒肉套餐",
                 "Amount": 1,
                 "Discount": {
-                    "FreeItem": "滷豆腐",
+                    "FreeItem": "韓式泡菜",
                     "Count": 1,
                     "Percentage": 0
                 }
@@ -85,7 +445,7 @@
             }
         },
         {
-            "Name": "買控肉飯加茶碗蒸就送奶茶",
+            "Name": "牛五花套餐加燒酒特惠",
             "Strategy": "POS點餐系統.Strategies.BuyNAndMFreeZ",
             "MultipleDiscount": {
                 "ItemName": "",
@@ -97,10 +457,9 @@
                 }
             },
             "SetsItems": {
-                "ItemName": ["控肉飯", "茶碗蒸"],
-
+                "ItemName": ["牛五花燒肉套餐", "韓式燒酒"],
                 "Discount": {
-                    "FreeItem": "奶茶",
+                    "FreeItem": "韓式泡菜",
                     "Count": 1,
                     "Percentage": 0,
                     "TotalPrice": 0
@@ -117,16 +476,16 @@
             }
         },
         {
-            "Name": "雞腿飯買三個200元",
+            "Name": "和牛套餐三份特價900元",
             "Strategy": "POS點餐系統.Strategies.BuyNTotalM",
             "MultipleDiscount": {
-                "ItemName": "雞腿飯",
+                "ItemName": "和牛燒肉套餐",
                 "Amount": 3,
                 "Discount": {
                     "FreeItem": "",
                     "Count": 0,
                     "Percentage": 0,
-                    "TotalPrice": 200
+                    "TotalPrice": 900
                 }
             },
             "SetsItems": {
@@ -149,10 +508,10 @@
             }
         },
         {
-            "Name": "雞腿飯買三個79折",
+            "Name": "黑豚套餐三份79折",
             "Strategy": "POS點餐系統.Strategies.BuyNDisocunt",
             "MultipleDiscount": {
-                "ItemName": "雞腿飯",
+                "ItemName": "黑豚燒肉套餐",
                 "Amount": 3,
                 "Discount": {
                     "FreeItem": "",
@@ -179,11 +538,9 @@
                     "TotalPrice": 0
                 }
             }
-
-
         },
         {
-            "Name": "排骨飯搭紅茶100元",
+            "Name": "牛五花套餐加生啤酒優惠價300元",
             "Strategy": "POS點餐系統.Strategies.BuyNAndBTotal",
             "MultipleDiscount": {
                 "ItemName": "",
@@ -195,13 +552,12 @@
                 }
             },
             "SetsItems": {
-                "ItemName": [ "排骨飯", "紅茶" ],
+                "ItemName": ["牛五花燒肉套餐", "生啤酒"],
                 "Discount": {
                     "FreeItem": "",
                     "Count": 0,
                     "Percentage": 0,
-                    "TotalPrice": 100
-
+                    "TotalPrice": 300
                 }
             },
             "TotalCheck": {
@@ -213,11 +569,9 @@
                     "TotalPrice": 0
                 }
             }
-
-
         },
         {
-            "Name": "排骨飯搭蛋糕150元",
+            "Name": "和牛套餐加抹茶冰淇淋420元",
             "Strategy": "POS點餐系統.Strategies.BuyNAndBTotal",
             "MultipleDiscount": {
                 "ItemName": "",
@@ -230,12 +584,12 @@
                 }
             },
             "SetsItems": {
-                "ItemName": [ "排骨飯", "蛋糕" ],
+                "ItemName": ["和牛燒肉套餐", "抹茶冰淇淋"],
                 "Discount": {
                     "FreeItem": "",
                     "Count": 0,
                     "Percentage": 0,
-                    "TotalPrice": 150
+                    "TotalPrice": 420
                 }
             },
             "TotalCheck": {
@@ -247,11 +601,9 @@
                     "TotalPrice": 0
                 }
             }
-
-
         },
         {
-            "Name": "排骨飯加紅茶打8折",
+            "Name": "黑豚套餐加生啤酒85折",
             "Strategy": "POS點餐系統.Strategies.BuyNAndMDiscount",
             "MultipleDiscount": {
                 "ItemName": "",
@@ -264,9 +616,9 @@
                 }
             },
             "SetsItems": {
-                "ItemName": [ "排骨飯", "紅茶" ],
+                "ItemName": ["黑豚燒肉套餐", "生啤酒"],
                 "Price": 0,
-                "Percentage": 0.8,
+                "Percentage": 0.85,
                 "TotalPrice": 0
             },
             "TotalCheck": {
@@ -278,8 +630,6 @@
                     "TotalPrice": 0
                 }
             }
-
-
         },
         {
             "Name": "全場消費打85折",
@@ -309,10 +659,9 @@
                     "TotalPrice": 0
                 }
             }
-
         },
         {
-            "Name": "全場消費300元折40",
+            "Name": "消費滿1000元現折100",
             "Strategy": "POS點餐系統.Strategies.TotalDiscount",
             "MultipleDiscount": {
                 "ItemName": "",
@@ -331,16 +680,14 @@
                 "TotalPrice": 0
             },
             "TotalCheck": {
-                "TotalPay": 300,
+                "TotalPay": 1000,
                 "Discount": {
                     "FreeItem": "",
                     "Count": 0,
                     "Percentage": 0,
-                    "TotalPrice": -40
+                    "TotalPrice": -100
                 }
             }
-
         }
-
     ]
 }
